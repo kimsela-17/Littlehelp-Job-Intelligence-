@@ -3,9 +3,6 @@
 **A machine learning-based job recommendation system and interactive dashboard for the Cambodian labor market.**
 
 LittleHelp Job Intelligence helps job seekers — including fresh graduates and returnees — find relevant employment opportunities by combining text-based recommendation models (Bag-of-Words, TF-IDF, and Sentence-BERT) with an interactive dashboard that visualizes labor market trends collected from major Cambodian job portals.
-
-This project was developed as a mini-project for the Department of Applied Mathematics and Statistics, Institute of Technology of Cambodia, under the supervision of Prof. HAS Sothea, PhD.
-
 ---
 
 ## Table of Contents
@@ -39,10 +36,10 @@ Job seekers in Cambodia, particularly fresh graduates and workers returning from
 
 ## Features
 
-- 🔍 **Job Recommendation Engine** — match user profiles to job postings using BoW, TF-IDF, or SBERT similarity scoring
-- 📊 **Interactive Dashboard** — explore job market trends by province, industry, salary, and education level
-- 🧑‍🤝‍🧑 **Returnee-Friendly Interface** — simplified job search experience for users with limited formal education or prior work experience
-- 🕸️ **Automated Data Pipeline** — scrapes, cleans, and updates job posting data from multiple sources
+- **Job Recommendation Engine** — match user profiles to job postings using BoW, TF-IDF, or SBERT similarity scoring
+- **Interactive Dashboard** — explore job market trends by province, industry, salary, and education level
+- **Returnee-Friendly Interface** — simplified job search experience for users with limited formal education or prior work experience
+
 
 ## Project Structure
 
@@ -164,19 +161,7 @@ The `EDA/` directory contains the notebooks and exported charts used to analyze 
 - Skill demand analysis
 - Job accessibility for returnees with limited education or experience
 
-## Team
-
-| Name           | Student ID  |
-|----------------|-------------|
-| Leng Kimsela   | e20230611   |
-| Loun Insou     | e20230555   |
-| Ra Dayou       | e20230502   |
-| Moeung Devid   | e20230232   |
-
-**Supervisor:** Prof. HAS Sothea, PhD
-**Group:** I3-AMS-B-Group01
-**Institution:** Institute of Technology of Cambodia, Department of Applied Mathematics and Statistics
 
 ## License
 
-This project is for academic purposes as part of a mini-project submission. Add a license here (e.g., MIT) if you intend to make this repository publicly reusable.
+This project is for academic purposes as part of a mini-project submission.
