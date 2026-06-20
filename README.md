@@ -1,53 +1,182 @@
-# littlehelp Job Intelligent
+# LittleHelp Job Intelligence
 
-## Mini Project Assignment
+**A machine learning-based job recommendation system and interactive dashboard for the Cambodian labor market.**
 
-## Run this program
+LittleHelp Job Intelligence helps job seekers — including fresh graduates and returnees — find relevant employment opportunities by combining text-based recommendation models (Bag-of-Words, TF-IDF, and Sentence-BERT) with an interactive dashboard that visualizes labor market trends collected from major Cambodian job portals.
 
-Download project to your local machine.
+This project was developed as a mini-project for the Department of Applied Mathematics and Statistics, Institute of Technology of Cambodia, under the supervision of Prof. HAS Sothea, PhD.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Clone the Repository](#clone-the-repository)
+  - [Frontend Setup](#frontend-setup)
+  - [Backend Setup](#backend-setup)
+  - [GPU Acceleration (Optional)](#gpu-acceleration-optional)
+- [Data Pipeline](#data-pipeline)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Team](#team)
+- [License](#license)
+
+---
+
+## Overview
+
+Job seekers in Cambodia, particularly fresh graduates and workers returning from abroad, often struggle to find employment opportunities that match their skills, education, and experience across scattered job portals. This project addresses that gap by:
+
+1. **Collecting** job postings from major Cambodian job portals (CamHR, BongThom, Khmer24, KhmerOnline) via web scraping.
+2. **Cleaning and engineering features** from the raw data (education level, province grouping, returnee eligibility, skill counts, etc.).
+3. **Analyzing** labor market trends through exploratory data analysis (salary distribution, education requirements, regional job availability).
+4. **Recommending** jobs to users using three text-matching approaches — BoW, TF-IDF, and SBERT — ranked by relevance.
+5. **Visualizing** all of the above through an interactive web dashboard with a dedicated, simplified view for returnees.
+
+## Features
+
+- 🔍 **Job Recommendation Engine** — match user profiles to job postings using BoW, TF-IDF, or SBERT similarity scoring
+- 📊 **Interactive Dashboard** — explore job market trends by province, industry, salary, and education level
+- 🧑‍🤝‍🧑 **Returnee-Friendly Interface** — simplified job search experience for users with limited formal education or prior work experience
+- 🕸️ **Automated Data Pipeline** — scrapes, cleans, and updates job posting data from multiple sources
+
+## Project Structure
+
+```
+.
+├── EDA/                    # Exploratory data analysis notebooks and generated charts
+├── backend/                 # FastAPI application
+│   ├── data/                 # Processed datasets used by the API
+│   ├── App.py                 # FastAPI entry point
+│   ├── filter_data.py          # Filtering logic (e.g., province, education, salary)
+│   ├── recommend.py            # Recommendation logic (BoW / TF-IDF / SBERT)
+│   ├── train_model.py          # Model training script
+│   └── requirements.txt
+├── data-pipeline/            # Web scraping and data preparation
+│   ├── crawler.py              # Scrapes job postings from job portals
+│   ├── cleaner.py               # Cleans and validates raw data
+│   ├── database.py              # Database read/write utilities
+│   └── pipeline_runner.py        # Orchestrates the full pipeline end-to-end
+├── frontend/                  # React + Vite application
+│   ├── public/
+│   ├── src/
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── tailwind.config.js
+├── .gitignore
+└── README.md
+```
+
+## Tech Stack
+
+| Layer                  | Technology                                         |
+|-------------------------|-----------------------------------------------------|
+| Backend                  | Python, FastAPI                                      |
+| Frontend                 | React, Vite, Tailwind CSS                             |
+| Data Collection          | Selenium, BeautifulSoup4, Scrapy                       |
+| Data Analysis            | Pandas, Matplotlib, Seaborn                            |
+| Recommendation Models    | Bag-of-Words, TF-IDF, Sentence-BERT (SBERT)             |
+| ML Acceleration (optional)| PyTorch with CUDA                                       |
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10+
+- Node.js 18+ and npm
+- pip / virtualenv (or conda)
+- Git
+- (Optional) An NVIDIA GPU with CUDA support, for faster model training
+
+### Clone the Repository
 
 ```bash
 git clone https://github.com/Radayou07/Job_Recommendation_system.git
-
-# use frontend directory
-cd frontend
-npm install # make sure nodejs is installed in your system
-npm run dev # run the server
-
-# open backend directory
-cd backend
-pip install -r requirements.txt
-python App.py # run App.py
+cd Job_Recommendation_system
 ```
 
->[!note]
-For Nvidia product with CUDA support install this instead for faster train data.
+### Frontend Setup
+
+```bash
+cd frontend
+npm install        # make sure Node.js is installed on your system
+npm run dev         # run the development server
+```
+
+The dashboard will be available at `http://localhost:5173` by default (Vite's default port).
+
+### Backend Setup
+
+Open a new terminal from the project root:
+
+```bash
+cd backend
+pip install -r requirements.txt
+python App.py       # run the API server
+```
+
+By default, the API will be available at `http://localhost:8000`.
+
+> **Note:** Make sure the backend server is running before using the dashboard, since the frontend fetches recommendation and job market data from the API.
+
+### GPU Acceleration (Optional)
+
+If you have an NVIDIA GPU with CUDA support, install the CUDA-enabled build of PyTorch instead of the default CPU-only version for significantly faster model training:
 
 ```bash
 pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124
 ```
 
-since with CUDA it will run faster than run on CPU.
+Training (e.g., the SBERT-based recommendation model via `train_model.py`) will run noticeably faster on a CUDA-enabled GPU compared to CPU-only execution.
 
-## Objective
+## Data Pipeline
 
-so the goal is to build a recommendation model that help ## Returnee ## to find a job easier.
+The `data-pipeline/` directory contains the scripts used to collect and prepare job posting data:
 
-## Models Implemented
+| Script                 | Purpose                                                            |
+|--------------------------|--------------------------------------------------------------------|
+| `crawler.py`              | Scrapes job postings from CamHR, BongThom, Khmer24, and KhmerOnline |
+| `cleaner.py`               | Cleans and validates the scraped data (missing values, duplicates) |
+| `database.py`              | Handles reading/writing the processed dataset                       |
+| `pipeline_runner.py`        | Runs the full pipeline end-to-end (crawl → clean → store)             |
 
-### 1. Bag of Words (BoW)
+### Usage
 
-* **Type:** Frequency-based Vectorization
-* **Purpose:** Serves as our foundational baseline. While simple, implementing BoW is the critical first step to understanding text preprocessing, tokenization, and basic NLP pipelines.
+```bash
+cd data-pipeline
+pip install -r requirements.txt
+python pipeline_runner.py
+```
 
-### 2. Term Frequency-Inverse Document Frequency (TF-IDF)
+This produces the cleaned, feature-enriched dataset used by `backend/` and `EDA/`.
 
-* **Type:** Weighted Keyword Vectorization
-* **Purpose:** Steps up the complexity by accounting for word importance. TF-IDF down-weights universally common words (like "the" or "and") and highlights unique keywords that define specific job roles and resumes.
+## Exploratory Data Analysis
 
-### 3. Sentence-BERT (SBERT)
+The `EDA/` directory contains the notebooks and exported charts used to analyze trends in the Cambodian labor market, including:
 
-* **Type:** Deep Learning Semantic Embeddings
-* **Model Used:** `BAAI/bge-base-en-v1.5`
-* **Purpose:** Our most advanced model. Instead of just matching literal keywords, SBERT captures the actual contextual meaning and intent behind candidate profiles and job descriptions, delivering highly accurate, context-aware recommendations.
+- Salary distribution by province and education level
+- Job type and category breakdowns
+- Skill demand analysis
+- Job accessibility for returnees with limited education or experience
 
+## Team
+
+| Name           | Student ID  |
+|----------------|-------------|
+| Leng Kimsela   | e20230611   |
+| Loun Insou     | e20230555   |
+| Ra Dayou       | e20230502   |
+| Moeung Devid   | e20230232   |
+
+**Supervisor:** Prof. HAS Sothea, PhD
+**Group:** I3-AMS-B-Group01
+**Institution:** Institute of Technology of Cambodia, Department of Applied Mathematics and Statistics
+
+## License
+
+This project is for academic purposes as part of a mini-project submission. Add a license here (e.g., MIT) if you intend to make this repository publicly reusable.
