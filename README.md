@@ -2,7 +2,7 @@
 
 **A machine learning-based job recommendation system and interactive dashboard for the Cambodian labor market.**
 
-LittleHelp Job Intelligence helps job seekers — including fresh graduates and returnees — find relevant employment opportunities by combining text-based recommendation models (Bag-of-Words, TF-IDF, and Sentence-BERT) with an interactive dashboard that visualizes labor market trends collected from major Cambodian job portals.
+- LittleHelp Job Intelligence helps job seekers — including fresh graduates and returnees — find relevant employment opportunities by combining text-  based recommendation models (Bag-of-Words, TF-IDF, and Sentence-BERT) with an interactive dashboard that visualizes labor market trends collected from major Cambodian job portals.
 ---
 
 ## Table of Contents
