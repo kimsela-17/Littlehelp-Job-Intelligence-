@@ -51,7 +51,3 @@ so the goal is to build a recommendation model that help ## Returnee ## to find 
 * **Model Used:** `BAAI/bge-base-en-v1.5`
 * **Purpose:** Our most advanced model. Instead of just matching literal keywords, SBERT captures the actual contextual meaning and intent behind candidate profiles and job descriptions, delivering highly accurate, context-aware recommendations.
 
-### 4. Hybrid Model (The "Brains")
-
-* **Type:** Multi-Strategy Ensemble (SBERT + TF-IDF)
-* **Purpose:** Combines the keyword precision of TF-IDF with the semantic understanding of SBERT. By using a weighted approach (70% SBERT, 30% TF-IDF), the system delivers matches that are both technically accurate and contextually relevant.
